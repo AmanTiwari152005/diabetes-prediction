@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diabetes Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #d4f7dc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 1000px;
+      width: 90%;
+      transition: all 0.3s ease-in-out;
+      text-align: center;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #2e7d32;
+    }
+
+    .catchy-line {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #388e3c;
+      margin-bottom: 25px;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: 0.3s ease-in-out;
+    }
+
+    input[type="number"]:focus {
+      border-color: #4caf50;
+      outline: none;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    .form-actions {
+      grid-column: span 2;
+      text-align: center;
+    }
+
+    input[type="submit"] {
+      padding: 12px 25px;
+      background-color: #4caf50;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #388e3c;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #1b5e20;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Diabetes Prediction Form</h2>
+    <div class="catchy-line">Empower your health — get your diabetes risk predicted instantly!</div>
+    <form action="/predict" method="post">
+      <input type="number" name="Pregnancies" placeholder="Pregnancies" required />
+      <input type="number" name="Glucose" placeholder="Glucose" required />
+      <input type="number" name="BloodPressure" placeholder="Blood Pressure" required />
+      <input type="number" name="SkinThickness" placeholder="Skin Thickness" required />
+      <input type="number" name="Insulin" placeholder="Insulin" required />
+      <input type="number" step="any" name="BMI" placeholder="BMI" required />
+      <input type="number" step="any" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" required />
+      <input type="number" name="Age" placeholder="Age" required />
+      
+      <div class="form-actions">
+        <input type="submit" value="Predict" />
+      </div>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+      {{ prediction_text }}
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
